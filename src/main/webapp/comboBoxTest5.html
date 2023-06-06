@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js
+"></script>
+<script type="text/javascript">
+$(function(){
+	$("select").change(function(){
+		var value = $(this).val();
+		$("span").html(value);
+	});
+});
+</script>
+</head>
+<body>
+	<select>
+		<option value="1">사과</option>
+		<option value="2">포도</option>
+		<option value="3">수박</option>
+		<option value="4">오렌지</option>
+		<option value="5">체리</option>
+	</select>
+	<hr>
+	선택한 과일 : <span></span>
+</body>
+</html>
+
+
+
+
+
+
+

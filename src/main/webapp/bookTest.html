@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	.innerBox{
+		float: left;
+		margin: 10px;
+	}
+	
+	#memberInfo{
+		width: 450px;
+		height: 250px;
+		border: solid 2px pink;
+		border-radius: 15px;
+		padding: 15px;
+	}
+</style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$("#memberInfo").hide();
+	
+	
+	//도서를 구매만 고객목록을 담기 위한 배열이름
+	var arr_customer;
+	
+	
+	$("#listCustomer").change(function(){
+		$("#memberInfo").hide(1000);
+		var index = $("#listCustomer > option:selected").attr("index");
+		var customer = arr_customer[index];
+		$("#image").attr("src",customer.fname);
+		$("#image").attr("width",200);
+		$("#image").attr("height",200);
+		
+		$("#custid").html(customer.custid);
+		$("#name").html(customer.name);
+		$("#address").html(customer.address);
+		$("#phone").html(customer.phone);
+		
+		$("#memberInfo").show(1000);
+		
+	});
+	
+	$("#listBook").click(function(){		
+		var bookid = $(this).val();
+		console.log("bookid:",bookid);
+		var data = {bookid:bookid};
+		$.ajax({
+			url:"customerList.jsp",
+			data:data,
+			success:function(arr){		
+				arr_customer = arr;				
+				$("#listCustomer").empty();
+				$("#listCustomer").append("<option>선택하세요</option>");
+				$.each(arr, function(index){
+					var option = $("<option></option>").html(this.name);
+					$(option).attr("value",this.custid);
+					$(option).attr("index",index);
+					$("#listCustomer").append(option);
+				});
+			}
+		});
+	});
+	
+	
+	$("#listPublisher").change(function(){
+		var publisher = $(this).val();
+		var data = {publisher:publisher};
+		$.ajax({
+			url:"listBook.jsp",
+			data:data,
+			success:function(arr){
+				$("#listBook").empty();
+				$.each(arr, function(){
+					var option = $("<option></option>").html(this.bookname);
+					$(option).attr("value",this.bookid);
+					$("#listBook").append(option);
+				});
+			}
+		})
+	});
+	
+	$.ajax({
+		url:"listPublisher.jsp",
+		success:function(arr){
+			$.each(arr, function(){
+				var option = $("<option></option>").html(this);
+				$("#listPublisher").append( option );
+			});
+		}
+	})
+});
+</script>
+</head>
+<body>	
+	<select id="listPublisher"></select>
+	<select id="listBook"></select>
+	<select id="listCustomer"></select>
+	<hr>
+	<div id="memberInfo">
+		<div class="innerBox">
+			<img src="" id="image">
+		</div>
+		<div class="innerBox">
+			<p>고객번호 : <span id="custid"></span></p>
+			<p>고객이름 : <span id="name"></span></p>
+			<p>고객주소 : <span id="address"></span></p>
+			<p>고객전화 : <span id="phone"></span></p>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+

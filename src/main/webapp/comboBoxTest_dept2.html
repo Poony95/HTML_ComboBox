@@ -1,0 +1,99 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js
+"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$("#empList").change(function(){
+		var eno = $(this).val();
+		var data = {eno:eno};
+		$.ajax({
+			url:"getEmp.jsp",
+			data:data,
+			success:function(emp){
+				$("#eno").html(emp.eno);
+				$("#ename").html(emp.ename);
+				$("#dno").html(emp.dno);
+				$("#salary").html(emp.salary);
+				$("#comm").html(emp.comm);
+				$("#hiredate").html(emp.hiredate);
+				$("#phone").html(emp.phone);
+				$("#addr").html(emp.addr);
+				$("#mgr").html(emp.mgr);
+				$("#job").html(emp.job);
+				$("#email").html(emp.email);
+				$("#jumin").html(emp.jumin);
+			}
+		});
+		
+	});
+	
+	
+	$("#deptList").change(function(){
+		var dno= $(this).val();
+		var data = {dno:dno};
+		$.ajax({
+			url:"listEmp.jsp",
+			data:data,
+			success:function(arr){
+				$("#empList").empty();
+				$.each(arr, function(){
+					var option = $("<option></option>");
+					$(option).html(this.ename);
+					$(option).attr("value",this.eno);
+					$("#empList").append(option);					
+				});
+			}				
+		});
+		
+	});
+	
+	$.ajax({
+		url:"listDept.jsp",
+		success:function(arr){
+			$.each(arr, function(){
+				var option = $("<option></option>").html(this.dname);
+				$(option).attr("value",this.dno);
+				$("#deptList").append(option);
+			});
+		}
+	})
+});
+</script>
+</head>
+<body>
+	<select id="deptList"></select>
+	<select id="empList"></select>
+	<hr>
+	<div id="empDetail">
+		<p>사원번호 : <span id="eno"></span></p>
+		<p>사원이름 : <span id="ename"></span></p>
+		<p>부서번호 : <span id="dno"></span></p>
+		<p>급여 : <span id="salary"></span></p>
+		<p>수당 : <span id="comm"></span></p>
+		<p>입사일 : <span id="hiredate"></span></p>
+		<p>전화번호 : <span id="phone"></span></p>
+		<p>주수 : <span id="addr"></span></p>
+		<p>관리자번호 : <span id="mgr"></span></p>
+		<p>직책 : <span id="job"></span></p>
+		<p>이메일 : <span id="email"></span></p>
+		<p>주민번호 : <span id="jumin"></span></p>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+

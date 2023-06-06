@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js
+"></script>
+<script type="text/javascript">
+	var person = {
+		name:"홍길동",
+		age:20,
+		addr:"서울시 마포구 서교동"
+	}
+	
+	$.each(person,function(){
+		console.log(this);
+	});
+	
+	/*
+	$.each(person, function(key){
+		console.log(key);
+		console.log(person[key])
+		console.log("---------------------------");
+	});
+	*/
+	
+	
+	/*
+	$.each(person,function(key, value){
+		console.log(key);
+		console.log(value);
+		console.log("---------------------");
+	})*/
+	
+
+
+
+	/*var arr = ["홍길동","이순신","유관순"];
+	$.each(arr, function(){
+		console.log(this);
+	})*/
+	
+	/*
+	$.each(arr, function(index){
+		console.log(index);
+		console.log(arr[index]);
+		console.log("-------------------------------")
+	})*
+	
+	
+	/*$.each(arr, function(index, item){
+		console.log(index);
+		console.log(item);
+		console.log(arr[index]);
+		console.log("-------------------------")
+	})*/
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+

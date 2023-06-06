@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$("select").change(function(){
+		var name = $(this).val();
+		var member = {irum:name};
+		
+		$.ajax({
+			url:"testOK.jsp",
+			data:member,
+			success:function(data){
+				$("#box").html(data);
+			}
+		})
+	});
+	
+});
+</script>
+</head>
+<body>
+	<div id="box"></div>
+	<hr>
+	<select>
+		<option>손지민</option>
+		<option>이아현</option>
+		<option>전찬혁</option>
+		<option>우현아</option>
+		<option>정소희</option>
+	</select>
+</body>
+</html>
+
+
+
+

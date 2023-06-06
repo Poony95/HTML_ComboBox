@@ -1,0 +1,4 @@
+$("#empDetail span")		==> 후손, 손자들도 포함!
+$("#empDetail > span")		==> 자손, 아들만 포함!
+
+
